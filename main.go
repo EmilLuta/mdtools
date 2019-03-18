@@ -2,14 +2,17 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"os/exec"
 )
 
 func main() {
 	cmd := exec.Command("git", "log")
-	gitOutput, err := cmd.Output()
+	logBytes, err := cmd.Output()
 	if err != nil {
 		fmt.Printf("Git Error: %s\n", err)
+		os.Exit(1)
 	}
-	fmt.Println(string(gitOutput))
+	log := string(logBytes)
+	fmt.Println(log)
 }
